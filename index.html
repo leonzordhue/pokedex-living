@@ -10,55 +10,76 @@
 :root{--shell:#c8102e;--shell-d:#8e0b20;--screen:#9bbc0f;--screen-d:#306230;--ink:#0f380f;--panel:#f4f1e8;--line:#d6d0c0;--txt:#1d1d1d;--muted:#6b665c;--ok:#2e8b57}
 *{box-sizing:border-box}
 body{margin:0;background:#2a2a2a;font:15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--txt)}
-.dex{max-width:1200px;margin:16px auto;background:var(--shell);border-radius:22px 22px 22px 60px;box-shadow:inset -8px -8px 0 var(--shell-d),0 10px 30px #0008;padding:16px}
+.dex{max-width:1240px;margin:16px auto;background:var(--shell);border-radius:22px 22px 22px 60px;box-shadow:inset -8px -8px 0 var(--shell-d),0 10px 30px #0008;padding:16px}
 header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:4px solid var(--shell-d);margin-bottom:12px}
-.lens{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#bfe9ff,#1e88e5 55%,#0d47a1);border:5px solid #fff;box-shadow:0 0 0 3px #222}
+.lens{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#bfe9ff,#1e88e5 55%,#0d47a1);border:5px solid #fff;box-shadow:0 0 0 3px #222;flex:none}
 .leds{display:flex;gap:6px}.leds i{width:14px;height:14px;border-radius:50%;border:2px solid #222;display:block}
 .leds i:nth-child(1){background:#ff5252}.leds i:nth-child(2){background:#ffd740}.leds i:nth-child(3){background:#69f0ae}
 h1{font:400 22px Silkscreen,monospace;color:#fff;margin:0;text-shadow:2px 2px 0 var(--shell-d)}
 .ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
-select,input,button{font:inherit;padding:8px 10px;border-radius:8px;border:2px solid #222;background:#fff}
+select,input,button{font:inherit;padding:8px 10px;border-radius:8px;border:2px solid #222;background:#fff;color:#1d1d1d}
 button{cursor:pointer;background:#222;color:#fff}button:hover{background:#444}
+button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #ffd740;outline-offset:2px}
 .grid{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:12px}
-.box{background:var(--panel);border:4px solid #222;border-radius:10px;min-height:300px}
+.box{background:var(--panel);border:4px solid #222;border-radius:10px;min-height:300px;min-width:0}
 .lcd{background:var(--screen);color:var(--ink);font-family:VT323,monospace;font-size:20px;padding:10px;border-bottom:4px solid #222;border-radius:6px 6px 0 0}
 .bar{height:10px;background:var(--screen-d);border-radius:5px;overflow:hidden;margin-top:6px}.bar b{display:block;height:100%;background:var(--ink)}
 .filters{display:flex;gap:6px;padding:8px;flex-wrap:wrap}.filters input{flex:1;min-width:120px}
-.list{max-height:70vh;overflow:auto}
+.list{max-height:72vh;overflow:auto}
 .row{display:flex;align-items:center;gap:8px;padding:4px 8px;border-top:1px solid var(--line);cursor:pointer}
 .row:hover,.row.sel{background:#fff6c8}
-.row img{width:40px;height:40px;image-rendering:pixelated}
-.row .n{color:var(--muted);font-family:VT323,monospace;font-size:18px;width:42px}
-.row .nm{flex:1;text-transform:capitalize}
-.row input{width:20px;height:20px;accent-color:var(--ok)}
+.row img{width:40px;height:40px;image-rendering:pixelated;flex:none}
+.row .n{color:var(--muted);font-family:VT323,monospace;font-size:18px;width:42px;flex:none}
+.row .nm{flex:1;text-transform:capitalize;min-width:0}
+.row input{width:20px;height:20px;accent-color:var(--ok);flex:none}
 .row.got .nm{color:var(--ok);font-weight:600}
+.st-b{font-size:11px;border-radius:6px;padding:0 5px;margin-left:4px;white-space:nowrap;font-weight:400;color:#fff}
+.b-e{background:#5c6bc0}.b-o{background:#f9a825;color:#222}.b-v{background:#8e24aa}.b-m{background:#c2185b}.b-x{background:#757575}.b-t{background:#00838f}
 #det{padding:0}
 .top{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.top img{width:120px;height:120px;image-rendering:pixelated;background:#cfe3a0;border:3px solid var(--ink);border-radius:8px}
 .top h2{margin:0;font:400 24px Silkscreen,monospace;text-transform:capitalize}
 .types span{display:inline-block;padding:2px 10px;border-radius:12px;background:#777;color:#fff;font:400 13px Silkscreen,monospace;margin-right:4px;text-transform:uppercase;border:2px solid #0004}
-.art{display:flex;gap:10px;align-items:flex-end}.art .big{width:170px;height:170px;object-fit:contain;image-rendering:auto;background:radial-gradient(circle,#e8f5c8,#9bbc0f);border:3px solid var(--ink);border-radius:50%}
-.shiny{font-size:13px;padding:4px 8px;margin-top:6px}
-.evo .st img{width:56px;height:56px;image-rendering:pixelated;display:block;margin:0 auto}
-.chips span img{width:40px;height:40px;image-rendering:pixelated;vertical-align:middle}
+.art{display:flex;gap:10px;align-items:flex-end}
+.art .big{width:170px;height:170px;object-fit:contain;background:radial-gradient(circle,#e8f5c8,#9bbc0f);border:3px solid var(--ink);border-radius:50%}
+.art .spr{width:110px;height:110px;image-rendering:pixelated;background:#cfe3a0;border:3px solid var(--ink);border-radius:8px;object-fit:contain}
+.sm{font-size:13px;padding:4px 8px;margin-top:6px}
 .body{padding:12px}
-h3{font:400 15px Silkscreen,monospace;margin:14px 0 6px;color:var(--shell)}
-.loc{border:2px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;background:#fff}
-.loc h4{margin:0 0 4px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.loc a{font-size:13px;font-weight:400}
+h3{font:400 15px Silkscreen,monospace;margin:16px 0 6px;color:var(--shell)}
+.obter{border:3px solid var(--ink);border-radius:8px;padding:8px 10px;background:#fffbe6;font-size:15px}
+.obter b{color:var(--shell)}
+.loc{border:2px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;display:flex;gap:10px;flex-wrap:wrap}
+.loc .txt{flex:1;min-width:220px}
+.loc h4{margin:0 0 4px}
+.loc .lk{font-size:13px;margin:4px 0 0}
+.loc .lk a{margin-right:10px}
+.pics{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}
+.photo{width:150px;height:auto;max-height:112px;object-fit:cover;border-radius:6px;border:2px solid #222}
+.mini{position:relative;width:180px;border:2px solid #222;border-radius:6px;overflow:hidden;cursor:pointer;line-height:0;background:#000}
+.mini img{width:100%;height:auto}
+.pin{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#ff1744;border:2px solid #fff;box-shadow:0 0 0 2px #000a;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(1.5)}}
+@media(prefers-reduced-motion:reduce){.pin{animation:none}}
 .how{font-size:14px;margin:2px 0}.how em{color:var(--muted);font-style:normal}
 .tag{display:inline-block;background:#ffe082;border-radius:6px;padding:0 6px;margin:1px 2px;font-size:12px}
 .tip{background:#e3f2fd;border-left:4px solid #1e88e5;padding:4px 8px;margin:4px 0;font-size:13px}
 .evo{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.evo .st{background:#fff;border:2px solid var(--line);border-radius:8px;padding:4px 8px;cursor:pointer;text-transform:capitalize}
-.evo .how2{font-size:12px;color:var(--muted)}
+.evo .st{background:#fff;border:2px solid var(--line);border-radius:8px;padding:4px 8px;cursor:pointer;text-transform:capitalize;text-align:center}
+.evo .st img{width:56px;height:56px;image-rendering:pixelated;display:block;margin:0 auto}
+.evo .how2{font-size:12px;color:var(--muted);text-transform:none}
 .empty{padding:30px;text-align:center;color:var(--muted)}
-.tabs{display:flex;gap:6px;padding:8px 12px 0}.tabs button{background:#ddd;color:#222}.tabs button.on{background:#222;color:#fff}
-.ga{font-size:13px;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{border:2px solid #222;border-radius:8px;padding:2px 8px;cursor:pointer;background:#fff;text-transform:capitalize}
-.chips span.miss{border-color:var(--shell);color:var(--shell)}
-footer{color:#fff;font-size:12px;margin-top:10px;opacity:.85}footer a{color:#fff}
-@media(max-width:760px){.dex{margin:0;border-radius:0;padding:10px}.grid{grid-template-columns:1fr}.list{max-height:45vh}.ctrl{margin-left:0;width:100%}.ctrl>*{flex:1}}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.tabs button{background:#ddd;color:#222;padding:5px 10px}.tabs button.on{background:#222;color:#fff}
+.ga{font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{border:2px solid #222;border-radius:8px;padding:2px 8px 2px 2px;cursor:pointer;background:#fff;text-transform:capitalize;font-size:14px}
+.chips span.miss{border-color:var(--shell);color:var(--shell);font-weight:600}
+.chips span img{width:40px;height:40px;image-rendering:pixelated;vertical-align:middle}
+.bigmap{position:relative;width:100%;border:3px solid #222;border-radius:8px;overflow:hidden;line-height:0;background:#000}
+.bigmap img{width:100%;height:auto}
+.bigmap .pt{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #000a;cursor:pointer;padding:0;background:#2979ff}
+.bigmap .pt.has{background:#ff1744}.bigmap .pt.done{background:#2e7d32}.bigmap .pt.focus{width:24px;height:24px;margin:-12px 0 0 -12px;background:#ffd740;animation:pulse 1.2s infinite}
+.legend{font-size:13px;margin:6px 0;display:flex;gap:12px;flex-wrap:wrap}.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1px solid #000}
+.loclist{columns:2 220px;font-size:14px;margin-top:8px}.loclist a{display:block;padding:1px 0}
+footer{color:#fff;font-size:12px;margin-top:10px;opacity:.9}footer a{color:#fff}
+@media(max-width:760px){.dex{margin:0;border-radius:0;padding:10px}.grid{grid-template-columns:1fr}.list{max-height:45vh}.ctrl{margin-left:0;width:100%}.ctrl>*{flex:1}.art .big{width:130px;height:130px}.art .spr{width:84px;height:84px}.mini{width:150px}.photo{width:130px}}
 </style>
 </head>
 <body>
@@ -69,49 +90,53 @@ footer{color:#fff;font-size:12px;margin-top:10px;opacity:.85}footer a{color:#fff
   <div class="ctrl">
     <select id="game" aria-label="Jogo"></select>
     <select id="mode" aria-label="Tipo de dex"><option value="reg">Dex regional</option><option value="nat">Dex nacional (até a gen)</option></select>
+    <button id="mapbtn" title="Mapa da região com todos os locais do jogo">🗺 Mapa</button>
     <button id="exp" title="Salvar progresso em arquivo">Exportar</button>
     <button id="imp" title="Carregar progresso de arquivo">Importar</button>
     <input type="file" id="file" accept=".json" hidden>
   </div>
 </header>
 <div class="grid">
-  <section class="box">
+  <section class="box" aria-label="Lista da Pokédex">
     <div class="lcd"><div id="prog">Carregando...</div><div class="bar"><b id="pbar" style="width:0"></b></div></div>
     <div class="filters">
-      <input id="q" placeholder="Nome ou número..." aria-label="Buscar">
-      <select id="show" aria-label="Filtro"><option value="all">Todos</option><option value="miss">Faltando</option><option value="got">Tenho</option></select>
+      <input id="q" placeholder="Nome ou número..." aria-label="Buscar por nome ou número">
+      <select id="show" aria-label="Filtro">
+        <option value="all">Todos</option>
+        <option value="miss">Faltando</option>
+        <option value="here">Faltando e dá pra pegar aqui</option>
+        <option value="got">Tenho</option>
+      </select>
     </div>
     <div class="list" id="list"></div>
   </section>
-  <section class="box" id="det"><div class="empty">Escolha um Pokémon na lista.</div></section>
+  <section class="box" id="det" aria-live="polite"><div class="empty">Escolha um Pokémon na lista ou abra o 🗺 Mapa.</div></section>
 </div>
-<footer>Dados: <a href="https://pokeapi.co" target="_blank" rel="noopener">PokéAPI</a> (consulta ao vivo). Progresso salvo neste navegador; use Exportar para guardar.</footer>
+<footer>Dados: <a href="https://pokeapi.co" target="_blank" rel="noopener">PokéAPI</a>. Mapas e fotos dos locais: <a href="https://bulbapedia.bulbagarden.net" target="_blank" rel="noopener">Bulbapedia</a>. Imagens: <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noopener">PokeAPI/sprites</a>. Projeto de fã, sem fins comerciais; Pokémon é marca da Nintendo, Game Freak e Creatures. O progresso fica neste navegador: use Exportar para guardar.</footer>
 </div>
 <script>
-// Jogos do Paulo: versões PokéAPI, dex regional, pasta de sprites da época e teto da dex nacional.
-const GAMES={
-  yellow:{nome:'Yellow',ver:['yellow'],dex:['kanto'],spr:'generation-i/yellow',nat:151,reg:'kanto'},
-  crystal:{nome:'Crystal',ver:['crystal'],dex:['original-johto'],spr:'generation-ii/crystal',nat:251,reg:'johto'},
-  emerald:{nome:'Emerald',ver:['emerald'],dex:['hoenn'],spr:'generation-iii/emerald',nat:386,reg:'hoenn'},
-  platinum:{nome:'Platinum',ver:['platinum'],dex:['extended-sinnoh'],spr:'generation-iv/platinum',nat:493,reg:'sinnoh'},
-  black:{nome:'Black',ver:['black'],dex:['original-unova'],spr:'generation-v/black-white',nat:649,reg:'unova'},
-  y:{nome:'Y',ver:['y'],dex:['kalos-central','kalos-coastal','kalos-mountain'],spr:'generation-vi/x-y',nat:721,reg:'kalos'},
-  ultrasun:{nome:'Ultra Sun',ver:['ultra-sun'],dex:['updated-alola'],spr:'generation-vii/ultra-sun-ultra-moon',nat:807,reg:'alola'},
-  sword:{nome:'Sword (+ DLCs)',ver:['sword','the-isle-of-armor-sword','the-crown-tundra-sword'],dex:['galar','isle-of-armor','crown-tundra'],spr:null,nat:898,reg:'galar'}
-};
+// Todos os jogos principais (data/games.json, gerado por scripts/build_avail.py a partir de scripts/games.json).
+let GAMES={};
+const HOMEG=['sword','shield','brilliant-diamond','shining-pearl','legends-arceus','scarlet','violet','legends-za'];
+// Como se transfere para cada geração.
+const COMO_TRAZ=g=>HOMEG.includes(g)?'pelo Pokémon HOME':({2:'pela Time Capsule',4:'pelo Pal Park (depois da Dex Nacional)',5:'pelo Poké Transfer (pós-jogo)',6:'pelo Pokémon Bank / Poké Transporter',7:'pelo Pokémon Bank / Poké Transporter'}[GAMES[g].gen]||'por troca');
+const INCENSO={298:'Sea Incense (no Marill/Azumarill)',360:'Lax Incense (no Wobbuffet)',406:'Rose Incense (no Roselia)',433:'Pure Incense (no Chimecho)',438:'Rock Incense (no Sudowoodo)',439:'Odd Incense (no Mr. Mime)',440:'Luck Incense (no Chansey)',446:'Full Incense (no Snorlax)',458:'Wave Incense (no Mantine)'};
 const API='https://pokeapi.co/api/v2/', SPR='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 const $=s=>document.querySelector(s);
 const cache=new Map();
-async function get(u){u=u.startsWith('http')?u:API+u;if(!cache.has(u))cache.set(u,fetch(u).then(r=>{if(!r.ok)throw Error(r.status+' '+u);return r.json()}).catch(e=>{cache.delete(u);throw e}));return cache.get(u)}
+async function get(u){u=u.startsWith('http')||u.startsWith('data/')?u:API+u;if(!cache.has(u))cache.set(u,fetch(u).then(r=>{if(!r.ok)throw Error(r.status+' '+u);return r.json()}).catch(e=>{cache.delete(u);throw e}));return cache.get(u)}
+const opt=u=>get(u).catch(()=>({}));
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
 const idOf=u=>+u.split('/').filter(Boolean).pop();
 const pretty=s=>s.replace(/-area$/,'').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const nm=s=>s.replace(/-/g,' ');
 
-const METODO={walk:'Grama / caverna (andando)','old-rod':'Pescar com Old Rod','good-rod':'Pescar com Good Rod','super-rod':'Pescar com Super Rod',surf:'Surfando','rock-smash':'Quebrando pedra (Rock Smash)',headbutt:'Cabeçada em árvore (Headbutt)','headbutt-low':'Headbutt em árvore (chance baixa)','headbutt-normal':'Headbutt em árvore','headbutt-high':'Headbutt em árvore (chance alta)','dark-grass':'Grama escura','grass-spots':'Grama tremendo','cave-spots':'Poeira na caverna','bridge-spots':'Sombra na ponte','super-rod-spots':'Pescar em água ondulando','surf-spots':'Surfar em água ondulando','yellow-flowers':'Flores amarelas','purple-flowers':'Flores roxas','red-flowers':'Flores vermelhas','rough-terrain':'Terreno acidentado',gift:'Presente de NPC','gift-egg':'Ovo de presente',static:'Encontro fixo no mapa',pokeflute:'Acordar com Poké Flute','squirt-bottle':'Regar com Squirt Bottle','wailmer-pail':'Regar com Wailmer Pail',seaweed:'Alga submarina (Dive)','roaming-grass':'Errante (grama)','roaming-water':'Errante (água)','devon-scope':'Revelar com Devon Scope','feebas-tile-fishing':'Pescar nos tiles do Feebas','island-scan':'Island Scan',sos:'Chamado SOS','bubbling-spots':'Água borbulhando','berry-trees':'Árvore de berry','npc-trade':'Troca com NPC','sos-from-bubbling-spot':'SOS em água borbulhando',overworld:'Visível no mapa','overworld-water':'Visível na água','overworld-flying':'Voando no mapa','overworld-special':'Visível no mapa (especial)','overworld-flying-special':'Voando (especial)','overworld-water-special':'Na água (especial)',horde:'Horda (5 de uma vez)','hidden-grotto':'Hidden Grotto','honey-tree':'Árvore com Honey','overworld-dirt':'Saindo da terra',wanderer:'Andando no mapa','wanderer-water':'Andando na água','chase-water':'Perseguindo na água','dynamax-adventure':'Dynamax Adventure','max-raid':'Max Raid (toca)','trash-can-ambush':'Lixeira (emboscada)','rustling-bush-ambush':'Arbusto mexendo','ceiling-ambush':'Emboscada do teto','ground-ambush':'Emboscada do chão','sky-ambush':'Emboscada do céu'};
-const DICA={headbutt:'Ensine Headbutt (TM/tutor) e bata nas árvores da área. Árvores diferentes têm tabelas diferentes.','headbutt-low':'Árvore "comum": bata em várias árvores da rota.','headbutt-normal':'Ensine Headbutt e bata nas árvores da rota.','headbutt-high':'Árvore "rara": poucas árvores da rota têm essa tabela.','rock-smash':'Use Rock Smash nas pedras quebráveis.','old-rod':'Use a Old Rod virado para a água.','good-rod':'Use a Good Rod virado para a água.','super-rod':'Use a Super Rod virado para a água.','honey-tree':'Passe Honey na árvore, espere 6 a 24 h e volte.',swarm:'Surto: só aparece no dia em que a TV/rádio anuncia o surto.',sos:'Use False Swipe + Adrenaline Orb e deixe o Pokémon chamar ajuda.','pokeflute':'Toque a Poké Flute para acordá-lo; é único, salve antes.',static:'Encontro único: salve o jogo antes.','max-raid':'Toca com luz roxa/vermelha no Wild Area. Mude a data do console para trocar a toca.','grass-spots':'Use o Poké Radar e ande na grama tremendo.','feebas-tile-fishing':'Só alguns tiles da Route 119 têm Feebas; pesque tile a tile.','squirt-bottle':'Regue a árvore que se mexe com a Squirt Bottle.','devon-scope':'Use a Devon Scope no Kecleon invisível.','horde':'Use Sweet Scent na grama para forçar hordas.','hidden-grotto':'Entre no buraco escondido; o Pokémon muda a cada dia.','island-scan':'Gaste 100 Festival Coins no Pokémon Center da ilha; depende do dia da semana.','npc-trade':'Troca com NPC: você precisa entregar o Pokémon pedido.'};
-const SKIP=/^(swarm-no|radar-off|radio-off|slot2-none|item-none|other-none|story-progress-none|great-marsh-daily-slot-none)$/;
+const METODO={walk:'Grama / caverna (andando)','old-rod':'Pescar com Old Rod','good-rod':'Pescar com Good Rod','super-rod':'Pescar com Super Rod',surf:'Surfando','rock-smash':'Quebrando pedra (Rock Smash)',headbutt:'Cabeçada em árvore (Headbutt)','headbutt-low':'Headbutt em árvore (chance baixa)','headbutt-normal':'Headbutt em árvore','headbutt-high':'Headbutt em árvore (chance alta)','dark-grass':'Grama escura','grass-spots':'Grama tremendo','cave-spots':'Poeira na caverna','bridge-spots':'Sombra na ponte','super-rod-spots':'Pescar em água ondulando','surf-spots':'Surfar em água ondulando','yellow-flowers':'Flores amarelas','purple-flowers':'Flores roxas','red-flowers':'Flores vermelhas','rough-terrain':'Terreno acidentado',gift:'Presente de NPC','gift-egg':'Ovo de presente',static:'Encontro fixo no mapa',pokeflute:'Acordar com Poké Flute','squirt-bottle':'Regar com Squirt Bottle','wailmer-pail':'Regar com Wailmer Pail',seaweed:'Alga submarina (Dive)','roaming-grass':'Errante (grama)','roaming-water':'Errante (água)','devon-scope':'Revelar com Devon Scope','feebas-tile-fishing':'Pescar nos tiles do Feebas','island-scan':'Island Scan',sos:'Chamado SOS','bubbling-spots':'Água borbulhando','berry-trees':'Árvore de berry','npc-trade':'Troca com NPC','sos-from-bubbling-spot':'SOS em água borbulhando',overworld:'Visível no mapa','overworld-water':'Visível na água','overworld-flying':'Voando no mapa','overworld-special':'Visível no mapa (especial)','overworld-flying-special':'Voando (especial)','overworld-water-special':'Na água (especial)',horde:'Horda (5 de uma vez)','hidden-grotto':'Hidden Grotto','honey-tree':'Árvore com Honey','overworld-dirt':'Saindo da terra',wanderer:'Andando no mapa','wanderer-water':'Andando na água','chase-water':'Perseguindo na água','dynamax-adventure':'Dynamax Adventure','max-raid':'Max Raid (toca)','trash-can-ambush':'Lixeira (emboscada)','rustling-bush-ambush':'Arbusto mexendo','ceiling-ambush':'Emboscada do teto','ground-ambush':'Emboscada do chão','sky-ambush':'Emboscada do céu','colosseum-bonus-disc-jpn':'Disco bônus do Colosseum (Japão)','pokemon-ranger':'Transferido do Pokémon Ranger'};
+const DICA={headbutt:'Ensine Headbutt (TM/tutor) e bata nas árvores da área. Árvores diferentes têm tabelas diferentes.','headbutt-low':'Árvore "comum": bata em várias árvores da rota.','headbutt-normal':'Ensine Headbutt e bata nas árvores da rota.','headbutt-high':'Árvore "rara": poucas árvores da rota têm essa tabela.','rock-smash':'Use Rock Smash nas pedras quebráveis.','old-rod':'Use a Old Rod virado para a água.','good-rod':'Use a Good Rod virado para a água.','super-rod':'Use a Super Rod virado para a água.','honey-tree':'Passe Honey na árvore, espere 6 a 24 h e volte.',swarm:'Surto: só aparece no dia em que a TV/rádio anuncia o surto.',sos:'Use False Swipe + Adrenaline Orb e deixe o Pokémon chamar ajuda.',pokeflute:'Toque a Poké Flute para acordá-lo; é único, salve antes.',static:'Encontro único: salve o jogo antes.','max-raid':'Toca com luz roxa/vermelha no Wild Area. Mude a data do console para trocar a toca.','dynamax-adventure':'Max Lair na Crown Tundra: o lendário do fim da aventura é capturado com certeza.','grass-spots':'Use o Poké Radar e ande na grama tremendo.','feebas-tile-fishing':'Só alguns tiles da Route 119 têm Feebas; pesque tile a tile.','squirt-bottle':'Regue a árvore que se mexe com a Squirt Bottle.','devon-scope':'Use a Devon Scope no Kecleon invisível.',horde:'Use Sweet Scent na grama para forçar hordas.','hidden-grotto':'Entre no buraco escondido; o Pokémon muda a cada dia.','island-scan':'Gaste 100 Festival Coins no Pokémon Center da ilha; depende do dia da semana.','npc-trade':'Troca com NPC: você precisa entregar o Pokémon pedido.','roaming-grass':'Errante: foge e muda de rota. Use Mean Look / Master Ball.','roaming-water':'Errante: foge e muda de lugar. Use Mean Look / Master Ball.','berry-trees':'Chacoalhe a árvore de berry para o Pokémon cair.',seaweed:'Use Dive e nade na alga escura.','bubbling-spots':'Pesque/surfe na água borbulhando.','gift-egg':'Ganhe o ovo do NPC e choque andando.'};
+const SKIP=/^(swarm-no|radar-off|radio-off|slot2-none|item-none|other-none|story-progress-none|great-marsh-daily-slot-none|backlot-not-mentioned)$/;
+const OUTRAS={'backlot-mentioned':'Sorteio diário: fale com o Mr. Backlot','defeated-ghetsis':'Depois de derrotar Ghetsis','special-encounter-couldnt-capture-before':'Só se não capturou na primeira vez','tv-option-blue':'Opção da TV: azul','tv-option-red':'Opção da TV: vermelho','other-choose-regidrago-pattern':'Escolha o padrão do Regidrago no Split-Decision Ruins','other-choose-regieleki-pattern':'Escolha o padrão do Regieleki no Split-Decision Ruins','other-eat-curry-with-cobalion-terrakion-virizion':'Ache as pegadas e faça curry (Cobalion/Terrakion/Virizion)','other-find-50-cavern-footprints':'Ache 50 pegadas na caverna','other-find-50-grassland-footprints':'Ache 50 pegadas no campo','other-find-50-iron-will-footprints':'Ache 50 pegadas (Iron Will)','other-found-11-times-roaming':'Depois de achar o errante 11 vezes','other-giratina-not-caught-in-distortion-world':'Se não capturou Giratina no Distortion World','other-grow-iceroot-carrot':'Plante a Iceroot Carrot (Glastrier)','other-grow-shaderoot-carrot':'Plante a Shaderoot Carrot (Spectrier)','other-scan-qr-code':'Escaneie o QR Code','other-talk-to-cynthias-grandmother':'Fale com a avó da Cynthia','other-talked-to-32-people':'Depois de falar com 32 pessoas','other-talked-to-32-people-underground':'Depois de falar com 32 pessoas no Underground','other-virtual-console':'Só na versão Virtual Console','other-witness-galarian-bird-fight':'Depois de ver as aves de Galar brigando','story-progress-awakened-beasts':'Depois de despertar as feras','story-progress-beat-galactic-coronet':'Depois de vencer a Galactic no Mt. Coronet','story-progress-beat-olivias-trial':'Depois do grande desafio da Olivia','story-progress-beat-team-galactic-iron-island':'Depois de vencer a Galactic na Iron Island','story-progress-catch-five-ultra-beasts':'Depois de capturar 5 Ultra Beasts','story-progress-cure-eldritch-nightmares':'Depois de curar o pesadelo (Darkrai)','story-progress-defeat-jupiter':'Depois de derrotar Jupiter','story-progress-defeat-mars':'Depois de derrotar Mars','story-progress-master-dojo-complete-first-trial':'Depois do 1º desafio do Master Dojo','story-progress-master-dojo-complete-third-trial':'Depois do 3º desafio do Master Dojo','story-progress-oak-eterna-city':'Depois de encontrar o Prof. Oak em Eterna City','story-progress-save-village-from-glastrier-spectrier':'Depois de salvar a vila (Glastrier/Spectrier)'};
 function cond(c){
   const m={'time-morning':'Manhã','time-day':'Dia','time-night':'Noite','swarm-yes':'Surto ativo','radar-on':'Poké Radar ligado','radio-hoenn':'Rádio: som de Hoenn','radio-sinnoh':'Rádio: som de Sinnoh','season-spring':'Primavera','season-summer':'Verão','season-autumn':'Outono','season-winter':'Inverno','story-progress-hall-of-fame':'Depois do Hall of Fame','story-progress-before-hall-of-fame':'Antes do Hall of Fame','story-progress-national-dex':'Com a Dex Nacional','story-progress-before-national-dex':'Antes da Dex Nacional'};
   if(m[c])return m[c];
@@ -121,25 +146,63 @@ function cond(c){
   if(r=c.match(/^weekday-(.+)/))return({sunday:'Domingo',monday:'Segunda',tuesday:'Terça',wednesday:'Quarta',thursday:'Quinta',friday:'Sexta',saturday:'Sábado'}[r[1]]);
   if(r=c.match(/^max-den-rating-(\d)/))return r[1]+'★';
   if(r=c.match(/^max-den-rarity-(.+)/))return'Toca '+({common:'comum',rare:'rara',special:'especial'}[r[1]]||r[1]);
+  if(OUTRAS[c])return OUTRAS[c];
+  if(r=c.match(/^alolan-diglett-found-(\d+)/))return'Ache '+r[1]+' Alolan Diglett na ilha';
+  if(r=c.match(/^berry-tree-type-(.+)/))return'Árvore de berry '+({blue:'azul',green:'verde',pink:'rosa',purple:'roxa',red:'vermelha',yellow:'amarela'}[r[1]]||r[1]);
+  if(r=c.match(/^coins-(\d+)/))return'Prêmio do Game Corner: '+r[1]+' fichas';
+  if(r=c.match(/^friend-safari-slot-(\d)/))return'Friend Safari, slot '+r[1]+(r[1]==='3'?' (o amigo precisa ter Hall of Fame)':'');
+  if(/^great-marsh-daily-slot-\d/.test(c))return'Great Marsh: Pokémon do dia (veja nos binóculos)';
+  if(r=c.match(/^honey-tree-group-(.)/))return'Árvore de mel, grupo '+r[1].toUpperCase();
+  if(r=c.match(/^item-(.+-fossil|old-amber|fossilized-.+)$/))return'Reviver fóssil: '+pretty(r[1]);
+  if(r=c.match(/^item-(.+)/))return'Com o item '+pretty(r[1]);
+  if(r=c.match(/^starter-(.+)/))return'Se escolheu '+pretty(r[1])+' de inicial';
+  if(r=c.match(/^trade-(.+)/))return'Entregue um '+pretty(r[1]);
+  if(r=c.match(/^trash-can-type-(.+)/))return'Lixeira '+({daily:'(todo dia)',thursday:'(só quinta)',tuesday:'(só terça)'}[r[1]]||r[1]);
+  if(r=c.match(/^save-data-from-(.+)/))return'Save de '+pretty(r[1])+' no console';
+  if(r=c.match(/^other-(.+)-in-party$/))return'Com '+pretty(r[1]).replace(/ /g,', ')+' no time';
   if(r=c.match(/^story-progress-(.+)/))return'Progresso: '+pretty(r[1]);
   return pretty(c);
 }
-
-let G='sword',ENTRIES=[],GOT=new Set(),SEL=null;
-const key=()=>'ld:'+G+':'+$('#mode').value;
-function sprite(id,shiny){const g=GAMES[G],s=shiny?'shiny/':'';
-  if(G==='black'&&id<=649)return SPR+'versions/generation-v/black-white/animated/'+s+id+'.gif';
-  // Gen 1 não tem shiny: cai no sprite moderno.
-  return g.spr&&id<=g.nat&&!(shiny&&G==='yellow')?SPR+'versions/'+g.spr+'/'+s+id+'.png':SPR+s+id+'.png'}
-const art=(id,shiny)=>SPR+'other/official-artwork/'+(shiny?'shiny/':'')+id+'.png';
 const TCOR={normal:'#9fa19f',fire:'#e62829',water:'#2980ef',electric:'#fac000',grass:'#3fa129',ice:'#3dcef3',fighting:'#ff8000',poison:'#9141cb',ground:'#915121',flying:'#81b9ef',psychic:'#ef4179',bug:'#91a119',rock:'#afa981',ghost:'#704170',dragon:'#5060e1',dark:'#624d4e',steel:'#60a1b8',fairy:'#ef70ef'};
 const TPT={normal:'Normal',fire:'Fogo',water:'Água',electric:'Elétrico',grass:'Planta',ice:'Gelo',fighting:'Lutador',poison:'Veneno',ground:'Terra',flying:'Voador',psychic:'Psíquico',bug:'Inseto',rock:'Pedra',ghost:'Fantasma',dragon:'Dragão',dark:'Sombrio',steel:'Aço',fairy:'Fada'};
+
+// Dados estáticos gerados pelos scripts/ (podem faltar: o app segue funcionando sem eles).
+let AV={},TR={},LOCS={},MAPS={},AREAS={area:{},jogo:{}};
+let G='sword',ENTRIES=[],GOT=new Set(),SEL=null;
+const key=()=>'ld:'+G+':'+$('#mode').value;
+const st=id=>(AV[G]||{})[id]||'';
+const obtainable=id=>/^[weo]/.test(st(id));
+
+function sprite(id,shiny){const g=GAMES[G],s=shiny?'shiny/':'';
+  if(g.spr==='generation-v/black-white'&&id<=649)return SPR+'versions/generation-v/black-white/animated/'+s+id+'.gif';
+  if(!g.spr&&g.gen>=8)return SPR+'other/home/'+s+id+'.png';
+  // Gen 1 não tem shiny: cai no sprite moderno.
+  return g.spr&&id<=g.nat&&!(shiny&&g.gen===1)?SPR+'versions/'+g.spr+'/'+s+id+'.png':SPR+s+id+'.png'}
+const art=(id,shiny)=>SPR+'other/official-artwork/'+(shiny?'shiny/':'')+id+'.png';
+const img=(src,id,cls='',alt='')=>`<img loading="lazy" class="${cls}" src="${src}" onerror="this.onerror=null;this.src='${SPR}${id}.png'" alt="${esc(alt)}">`;
+
+// Locais: área da PokéAPI -> local -> nome, mapa e fotos (data/locs.json).
+const locOf=area=>area.startsWith('bp:')?area:AREAS.area[area]||area.replace(/-area$/,'');
+function locName(loc){return LOCS[loc]?.nome||ENC[G]?.locais?.[loc]?.nome||(loc.startsWith('bp:')?loc.slice(3):pretty(loc))}
+function areaName(area){const l=locOf(area);if(l===area)return locName(l);const suf=area.slice(l.length+1).replace(/^area$/,'');return locName(l)+(suf?' · '+pretty(suf):'')}
+// Foto do local no visual do jogo (frlg, hgss, oras, bdsp...), senão a da geração mais próxima.
+function photo(loc){const f=LOCS[loc]?.fotos||{},g=GAMES[G];if(f[g.foto])return f[g.foto];if(f[g.gen])return f[g.gen];
+  const num=Object.keys(f).filter(k=>/^\d$/.test(k)).sort((a,b)=>Math.abs(a-g.gen)-Math.abs(b-g.gen));return f[num[0]]||Object.values(f)[0]}
+const bpLink=loc=>'https://bulbapedia.bulbagarden.net/wiki/'+encodeURIComponent((LOCS[loc]?.bp||(loc.startsWith('bp:')?loc.slice(3):locName(loc))).replace(/ /g,'_'));
+// Encontros extraídos da Bulbapedia para jogos que a PokéAPI não cobre (data/enc/<jogo>.json).
+let ENC={};
+const loadEnc=async g=>GAMES[g].src==='bp'?(ENC[g]=ENC[g]||await opt('data/enc/'+g+'.json')):null;
+function miniMap(loc){const L=LOCS[loc],M=L&&MAPS[L.mapa];if(!M||L.x==null||!mapOk(L.mapa))return'';
+  return`<div class="mini" role="button" tabindex="0" data-map="${esc(L.mapa)}" data-focus="${esc(loc)}" title="Abrir mapa de ${esc(M.titulo||L.mapa)}"><img loading="lazy" src="data/${M.arquivo}" alt="Mapa com ${esc(locName(loc))} marcado"><span class="pin" style="left:${L.x}%;top:${L.y}%"></span></div>`}
+// mapa coerente com o jogo atual (evita mostrar Kalos para um local homônimo em Hoenn)
+function mapOk(k){const c={};(AREAS.jogo[G]||[]).forEach(l=>{const m=LOCS[l]?.mapa;if(m&&LOCS[l].x!=null)c[m]=(c[m]||0)+1});return !Object.values(c).some(n=>n>=3)||(c[k]||0)>=3}
+function pics(loc){const p=photo(loc);return`<div class="pics">${p?`<img class="photo" loading="lazy" src="data/${p}" alt="Foto de ${esc(locName(loc))}">`:''}${miniMap(loc)}</div>`}
 
 async function loadDex(){
   const g=GAMES[G];$('#list').innerHTML='<div class="empty">Carregando dex...</div>';
   try{
     if($('#mode').value==='nat'){
-      const d=await get('pokemon-species?limit='+g.nat);ENTRIES=d.results.map((s,i)=>({n:i+1,id:i+1,name:s.name}));
+      const d=await get('pokemon-species?limit='+g.nat);ENTRIES=d.results.map((s,i)=>({n:i+1,id:idOf(s.url),name:s.name}));
     }else{
       const seen=new Set();ENTRIES=[];
       for(const dx of g.dex){const d=await get('pokedex/'+dx);for(const e of d.pokemon_entries){const id=idOf(e.pokemon_species.url);if(seen.has(id))continue;seen.add(id);ENTRIES.push({n:ENTRIES.length+1,id,name:e.pokemon_species.name})}}
@@ -147,22 +210,37 @@ async function loadDex(){
   }catch(e){$('#list').innerHTML='<div class="empty">Falha ao carregar a dex ('+esc(e.message)+'). Verifique a internet e recarregue.</div>';return}
   GOT=new Set(ls.get(key(),[]));renderList();
 }
+const BADGE={e:'evo',o:'ovo',v:'troca',t:'transferir',m:'evento',x:'fora'};
 function renderList(){
   const q=norm($('#q').value),f=$('#show').value;
-  const rows=ENTRIES.filter(e=>(!q||norm(e.name).includes(q)||String(e.id)===q||String(e.n)===q)&&(f==='all'||(f==='got')===GOT.has(e.id)));
-  $('#list').innerHTML=rows.map(e=>`<div class="row${GOT.has(e.id)?' got':''}${SEL===e.id?' sel':''}" data-id="${e.id}"><span class="n">#${String(e.n).padStart(3,'0')}</span><img loading="lazy" src="${sprite(e.id)}" alt="" onerror="this.src='${SPR}${e.id}.png'"><span class="nm">${esc(e.name.replace(/-/g,' '))}</span><input type="checkbox" title="Tenho na living dex" ${GOT.has(e.id)?'checked':''}></div>`).join('')||'<div class="empty">Nada encontrado.</div>';
+  const rows=ENTRIES.filter(e=>(!q||norm(e.name).includes(q)||String(e.id)===q||String(e.n)===q)&&(f==='all'||(f==='got'?GOT.has(e.id):!GOT.has(e.id)&&(f!=='here'||obtainable(e.id)))));
+  $('#list').innerHTML=rows.map(e=>{const s=st(e.id)[0];return`<div class="row${GOT.has(e.id)?' got':''}${SEL===e.id?' sel':''}" data-id="${e.id}"><span class="n">#${String(e.n).padStart(3,'0')}</span>${img(sprite(e.id),e.id)}<span class="nm">${esc(nm(e.name))}${s&&s!=='w'?`<span class="st-b b-${s}" title="${esc(statusText(e.id,true))}">${BADGE[s]}</span>`:''}</span><input type="checkbox" aria-label="Tenho ${esc(nm(e.name))}" ${GOT.has(e.id)?'checked':''}></div>`}).join('')||'<div class="empty">Nada encontrado.</div>';
   const t=ENTRIES.length,c=ENTRIES.filter(e=>GOT.has(e.id)).length;
   $('#prog').textContent=`${GAMES[G].nome}: ${c}/${t} (${t?Math.round(c*100/t):0}%)`;$('#pbar').style.width=(t?c*100/t:0)+'%';
 }
+function setGot(id,on){on?GOT.add(id):GOT.delete(id);ls.set(key(),[...GOT]);renderList()}
 $('#list').addEventListener('click',ev=>{
   const row=ev.target.closest('.row');if(!row)return;const id=+row.dataset.id;
-  if(ev.target.type==='checkbox'){ev.target.checked?GOT.add(id):GOT.delete(id);ls.set(key(),[...GOT]);renderList();return}
+  if(ev.target.type==='checkbox'){setGot(id,ev.target.checked);return}
   showMon(id);
 });
+const spName=id=>(ENTRIES.find(e=>e.id===id)||{}).name;
+function statusText(id,plain){
+  const s=st(id),[k,v]=[s[0],s.slice(2)],n=x=>{const a=spName(+x);return plain?nm(a||'#'+x):`<a href="#" data-go="${x}">${esc(nm(a||'#'+x))}</a>`};
+  if(!s)return'Sem dados de disponibilidade.';
+  if(k==='w')return'Captura direta neste jogo: veja os locais abaixo.';
+  if(k==='e')return'Não aparece selvagem: evolua '+n(v)+' (requisitos na linha evolutiva).';
+  if(k==='o')return'Choque um ovo de '+n(v)+' na Day Care/Nursery.'+(INCENSO[id]&&GAMES[G].gen>=3?' Precisa do '+INCENSO[id]+' segurando.':'');
+  if(k==='v')return'Não sai neste jogo, mas sai em '+esc(v)+': pegue lá e troque.';
+  if(k==='t')return'Não sai neste jogo: traga de '+esc(v)+' '+COMO_TRAZ(G)+'.';
+  if(k==='m')return'Mítico: só por evento de distribuição.';
+  return'Não existe em '+esc(GAMES[G].nome)+'.';
+}
 
 async function encountersFor(species){
   // Formas regionais (Galar/Alola) são "pokemon" separados: junta os encontros de todas as variedades.
   const vers=GAMES[G].ver,out=[];
+  if(GAMES[G].src==='bp')return out;
   for(const v of species.varieties){
     const pid=idOf(v.pokemon.url),form=v.is_default?'':v.pokemon.name.replace(species.name+'-','');
     let enc=[];try{enc=await get('pokemon/'+pid+'/encounters')}catch{}
@@ -171,12 +249,15 @@ async function encountersFor(species){
   return out;
 }
 function groupDetails(det){
-  const m=new Map();
+  const m=new Map(),seen=new Set();
   for(const d of det){
     const cs=d.condition_values.map(c=>c.name).filter(c=>!SKIP.test(c));
+    const raw=JSON.stringify([d.method.name,cs,d.min_level,d.max_level,d.chance]);
     const k=d.method.name+'|'+cs.join(',');
     const o=m.get(k)||{method:d.method.name,cs,min:99,max:0,ch:0};
-    o.min=Math.min(o.min,d.min_level);o.max=Math.max(o.max,d.max_level);o.ch+=d.chance;m.set(k,o);
+    o.min=Math.min(o.min,d.min_level);o.max=Math.max(o.max,d.max_level);
+    if(!seen.has(raw)){seen.add(raw);o.ch+=d.chance}
+    m.set(k,o);
   }
   return[...m.values()];
 }
@@ -194,23 +275,32 @@ function evoHow(d){
   if(d.time_of_day)p.push(d.time_of_day==='day'?'de dia':d.time_of_day==='night'?'de noite':d.time_of_day);
   if(d.held_item&&t!=='trade')p.push('segurando '+pretty(d.held_item.name));
   if(d.known_move)p.push('sabendo '+pretty(d.known_move.name));
-  if(d.known_move_type)p.push('com golpe tipo '+d.known_move_type.name);
+  if(d.known_move_type)p.push('com golpe tipo '+(TPT[d.known_move_type.name]||d.known_move_type.name));
   if(d.location)p.push('em '+pretty(d.location.name));
   if(d.gender)p.push(d.gender===1?'fêmea':'macho');
   if(d.needs_overworld_rain)p.push('chovendo');
   if(d.party_species)p.push('com '+pretty(d.party_species.name)+' no time');
-  if(d.party_type)p.push('com tipo '+d.party_type.name+' no time');
+  if(d.party_type)p.push('com tipo '+(TPT[d.party_type.name]||d.party_type.name)+' no time');
   if(d.relative_physical_stats!=null)p.push({1:'Atk > Def',0:'Atk = Def','-1':'Atk < Def'}[d.relative_physical_stats]);
   if(d.turn_upside_down)p.push('console de cabeça pra baixo');
   return p.join(', ');
 }
+// A PokéAPI junta os requisitos de todos os jogos: fica só com o que vale no jogo escolhido.
+function evoForGame(ds){
+  const mine=new Set(AREAS.jogo[G]||[]),gen=GAMES[G].gen;
+  const locHit=ds.filter(d=>d.location&&mine.has(d.location.name));
+  if(locHit.length)return locHit;
+  let r=ds.filter(d=>!d.location);
+  if(r.some(d=>d.min_affection)&&r.some(d=>d.min_happiness))r=r.filter(d=>gen>=8?!d.min_affection:!d.min_happiness);
+  return r.length?r:ds;
+}
 function evoHtml(node,first=true){
   const id=idOf(node.species.url);
-  const how=node.evolution_details.map(evoHow).filter(Boolean);
-  const me=`${first?'':'<span>→</span>'}<span class="st" data-go="${id}"><img loading="lazy" src="${sprite(id)}" onerror="this.src='${SPR}${id}.png'" alt="">${esc(node.species.name.replace(/-/g,' '))}${how.length?`<br><span class="how2">${esc(how.join(' ou '))}</span>`:''}</span>`;
+  const how=evoForGame(node.evolution_details).map(evoHow).filter(Boolean);
+  const me=`${first?'':'<span aria-hidden="true">→</span>'}<span class="st" data-go="${id}">${img(sprite(id),id)}${esc(nm(node.species.name))}${how.length?`<br><span class="how2">${esc([...new Set(how)].join(' ou '))}</span>`:''}</span>`;
   if(!node.evolves_to.length)return me;
   if(node.evolves_to.length===1)return me+evoHtml(node.evolves_to[0],false);
-  return me+'<span>→</span><span class="evo" style="flex-direction:column;align-items:flex-start">'+node.evolves_to.map(n=>'<span class="evo">'+evoHtml(n,true)+'</span>').join('')+'</span>';
+  return me+'<span aria-hidden="true">→</span><span class="evo" style="flex-direction:column;align-items:flex-start">'+node.evolves_to.map(n=>'<span class="evo">'+evoHtml(n,true)+'</span>').join('')+'</span>';
 }
 
 async function showMon(id){
@@ -219,58 +309,125 @@ async function showMon(id){
   try{
     const sp=await get('pokemon-species/'+id);
     const [pk,encs,chain]=await Promise.all([get('pokemon/'+id),encountersFor(sp),get(sp.evolution_chain.url)]);
-    const flav=(sp.flavor_text_entries.find(f=>f.language.name==='en'&&g.ver.includes(f.version.name))||sp.flavor_text_entries.find(f=>f.language.name==='en'))?.flavor_text.replace(/\s+/g,' ')||'';
+    const tr=TR[id]||{};
+    const flav=tr.f||(sp.flavor_text_entries.find(f=>f.language.name==='en'&&g.ver.includes(f.version.name))||sp.flavor_text_entries.find(f=>f.language.name==='en'))?.flavor_text.replace(/\s+/g,' ')||'';
+    const gen=tr.g||(sp.genera.find(x=>x.language.name==='en')||{}).genus||'';
     const byArea=new Map();for(const e of encs){const k=e.area+'|'+e.form;(byArea.get(k)||byArea.set(k,[]).get(k)).push(e)}
     let locHtml='';
     for(const [k,list] of byArea){
-      const [area,form]=k.split('|');const rows=groupDetails(list.flatMap(e=>e.det));
+      const [area,form]=k.split('|'),loc=locOf(area);const rows=groupDetails(list.flatMap(e=>e.det));
       const dlc=list.some(e=>e.ver.includes('isle-of-armor'))?' (Isle of Armor)':list.some(e=>e.ver.includes('crown-tundra'))?' (Crown Tundra)':'';
       const tips=[...new Set(rows.map(r=>DICA[r.method]).concat(rows.some(r=>r.cs.includes('swarm-yes'))?[DICA.swarm]:[]).filter(Boolean))];
-      locHtml+=`<div class="loc"><h4><span>${esc(pretty(area))}${dlc}${form?' <span class="tag">forma '+esc(form)+'</span>':''}</span><span><a href="#" data-area="${esc(area)}">quem mais tem aqui</a> · <a target="_blank" rel="noopener" href="https://bulbapedia.bulbagarden.net/w/index.php?search=${encodeURIComponent(pretty(area))}">mapa (Bulbapedia)</a></span></h4>`+
+      locHtml+=`<div class="loc"><div class="txt"><h4>${esc(areaName(area))}${dlc}${form?' <span class="tag">forma '+esc(form)+'</span>':''}</h4>`+
         rows.map(r=>`<p class="how"><b>${esc(METODO[r.method]||pretty(r.method))}</b> <em>Nv. ${r.min===r.max?r.min:r.min+'-'+r.max} · ${Math.min(r.ch,100)}%</em> ${r.cs.map(c=>'<span class="tag">'+esc(cond(c))+'</span>').join('')}</p>`).join('')+
-        tips.map(t=>'<div class="tip">'+esc(t)+'</div>').join('')+'</div>';
+        tips.map(t=>'<div class="tip">'+esc(t)+'</div>').join('')+
+        `<p class="lk"><a href="#" data-loc="${esc(loc)}">Quem mais tem aqui</a><a target="_blank" rel="noopener" href="${bpLink(loc)}">Bulbapedia</a></p></div>${pics(loc)}</div>`;
     }
-    if(!locHtml)locHtml='<div class="loc">Não aparece selvagem em '+esc(g.nome)+'. Veja a linha evolutiva abaixo (evoluir, chocar ovo ou trazer de outro jogo/troca).</div>';
-    const other=await otherGames(sp);
-    const gen=(sp.genera.find(x=>x.language.name==='en')||{}).genus||'';
-    det.innerHTML=`<div class="lcd"><div class="top"><div><div class="art"><img class="big" id="artimg" src="${art(id)}" alt="${esc(sp.name)}"><img id="sprimg" src="${sprite(id)}" onerror="this.src='${SPR}${id}.png'" alt="sprite de ${esc(g.nome)}" title="Sprite de ${esc(g.nome)}"></div><button class="shiny" id="shinybtn" aria-pressed="false">✨ Ver shiny</button></div><div><h2>#${String(id).padStart(3,'0')} ${esc(sp.name.replace(/-/g,' '))}</h2><div style="font-size:18px">${esc(gen)} · ${pk.height/10} m · ${pk.weight/10} kg</div><div class="types">${pk.types.map(t=>`<span style="background:${TCOR[t.type.name]||'#777'}">${TPT[t.type.name]||t.type.name}</span>`).join('')}</div><div style="font-size:17px;max-width:520px">${esc(flav)}</div><audio id="cry" src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg" preload="none"></audio><button class="shiny" onclick="document.getElementById('cry').play()">🔊 Grito</button></div></div></div>
-      <div class="body"><label style="font-size:14px"><input type="checkbox" id="gotme" ${GOT.has(id)?'checked':''}> Tenho na living dex de ${esc(g.nome)}</label>
+    if(g.src==='bp')locHtml=bpCards(id,await loadEnc(G));
+    if(!locHtml)locHtml='<div class="loc">Não aparece selvagem em '+esc(g.nome)+'. Veja "Como obter" acima.</div>';
+    const other=Object.entries(GAMES).filter(([k])=>k!==G&&/^[weo]/.test((AV[k]||{})[id]||'')).map(([k,x])=>{const s=AV[k][id][0];return x.nome.replace(' (+ DLCs)','')+(s==='w'?'':s==='e'?' (evoluindo)':' (ovo)')});
+    det.innerHTML=`<div class="lcd"><div class="top"><div><div class="art"><img class="big" id="artimg" src="${art(id)}" alt="Arte oficial de ${esc(nm(sp.name))}">${img(sprite(id),id,'spr','Sprite de '+g.nome).replace('<img','<img id="sprimg"')}</div><button class="sm" id="shinybtn" aria-pressed="false">✨ Ver shiny</button> <button class="sm" id="crybtn">🔊 Grito</button></div><div style="flex:1;min-width:220px"><h2>#${String(id).padStart(3,'0')} ${esc(nm(sp.name))}</h2><div style="font-size:18px">${esc(gen)} · ${pk.height/10} m · ${pk.weight/10} kg</div><div class="types">${pk.types.map(t=>`<span style="background:${TCOR[t.type.name]||'#777'}">${TPT[t.type.name]||t.type.name}</span>`).join('')}</div><div style="font-size:18px;max-width:560px">${esc(flav)}</div></div></div></div>
+      <div class="body"><label style="font-size:15px"><input type="checkbox" id="gotme" ${GOT.has(id)?'checked':''}> Tenho na living dex de ${esc(g.nome)}</label>
+      <h3>Como obter em ${esc(g.nome)}</h3><div class="obter">${statusText(id)}</div>
       <h3>Onde encontrar</h3>${locHtml}
       <h3>Linha evolutiva</h3><div class="evo">${evoHtml(chain.chain)}</div>
-      <h3>Nos seus outros jogos</h3><div class="ga">${other}</div></div>`;
+      <h3>Nos seus outros jogos</h3><div class="ga">${other.length?'Dá para obter também em: '+esc(other.join(', ')):'Não sai em nenhum dos seus outros jogos.'}</div></div>`;
+    const cry=new Audio('https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/'+id+'.ogg');
+    $('#crybtn').onclick=()=>cry.play().catch(()=>{});
     $('#shinybtn').onclick=e=>{const on=e.target.getAttribute('aria-pressed')!=='true';e.target.setAttribute('aria-pressed',on);e.target.textContent=on?'Ver normal':'✨ Ver shiny';$('#artimg').src=art(id,on);$('#sprimg').src=sprite(id,on)};
-    $('#gotme').onchange=e=>{e.target.checked?GOT.add(id):GOT.delete(id);ls.set(key(),[...GOT]);renderList()};
-  }catch(e){det.innerHTML='<div class="empty">Erro ao consultar ('+esc(e.message)+').</div>'}
+    $('#gotme').onchange=e=>setGot(id,e.target.checked);
+  }catch(e){det.innerHTML='<div class="empty">Erro ao consultar ('+esc(e.message)+'). Verifique a internet.</div>'}
 }
-async function otherGames(sp){
-  const vs=new Set();
-  for(const v of sp.varieties){try{for(const a of await get('pokemon/'+idOf(v.pokemon.url)+'/encounters'))for(const d of a.version_details)vs.add(d.version.name)}catch{}}
-  const ok=Object.entries(GAMES).filter(([k,g])=>k!==G&&g.ver.some(v=>vs.has(v))).map(([,g])=>g.nome);
-  return ok.length?'Selvagem/presente também em: '+ok.join(', '):'Não aparece selvagem nos seus outros jogos.';
+
+// Cards de encontro dos jogos extraídos da Bulbapedia (formato em scripts/ENC_SCHEMA.md).
+function bpCards(id,E){
+  const rows=(E&&E.enc&&E.enc[id])||[],by=new Map();
+  for(const r of rows){const k=r.loc+'|'+(r.form||'');(by.get(k)||by.set(k,[]).get(k)).push(r)}
+  let h='';
+  for(const [k,list] of by){
+    const [loc,form]=k.split('|'),dlc=E.locais?.[loc]?.dlc;
+    const tips=[...new Set(list.map(r=>r.nota).concat(list.map(r=>DICA[r.m])).filter(Boolean))];
+    h+=`<div class="loc"><div class="txt"><h4>${esc(locName(loc))}${dlc?' ('+esc(pretty(dlc))+')':''}${form?' <span class="tag">forma '+esc(form)+'</span>':''}</h4>`+
+      list.map(r=>`<p class="how"><b>${esc(r.mpt||METODO[r.m]||pretty(r.m||''))}</b> <em>${r.lv?'Nv. '+esc(r.lv):''}${r.ch?' · '+esc(r.ch)+(/^\d+(\.\d+)?$/.test(r.ch)?'%':''):''}</em> ${(r.cs||[]).map(c=>'<span class="tag">'+esc(c)+'</span>').join('')}</p>`).join('')+
+      tips.map(t=>'<div class="tip">'+esc(t)+'</div>').join('')+
+      `<p class="lk"><a href="#" data-loc="${esc(loc)}">Quem mais tem aqui</a><a target="_blank" rel="noopener" href="${bpLink(loc)}">Bulbapedia</a></p></div>${pics(loc)}</div>`;
+  }
+  return h;
 }
-async function showArea(area){
+
+// Todos os Pokémon de um local (todas as áreas) neste jogo.
+async function showLocation(loc){
   const det=$('#det');det.innerHTML='<div class="empty">Carregando local...</div>';const g=GAMES[G];
+  if(g.src==='bp'){
+    const E=await loadEnc(G)||{},ids=Object.keys(E.enc||{}).filter(id=>E.enc[id].some(r=>r.loc===loc)).map(Number);
+    det.innerHTML=`<div class="lcd"><h2 style="font:400 22px Silkscreen,monospace;margin:0">${esc(locName(loc))}</h2>${esc(g.nome)} · ${ids.length} Pokémon · em vermelho = falta na sua dex</div><div class="body">${pics(loc)}
+      <h3>Pokémon deste local</h3><div class="chips">${ids.map(i=>`<span class="${ENTRIES.some(e=>e.id===i)&&!GOT.has(i)?'miss':''}" data-go="${i}">${img(SPR+i+'.png',i)}${esc(nm(spName(i)||TR[i]?.n||'#'+i))}</span>`).join('')||'Sem Pokémon neste jogo.'}</div>
+      <p class="lk"><a target="_blank" rel="noopener" href="${bpLink(loc)}">Abrir na Bulbapedia</a></p></div>`;
+    return;
+  }
   try{
-    const a=await get('location-area/'+area);
-    const mons=a.pokemon_encounters.filter(p=>p.version_details.some(v=>g.ver.includes(v.version.name))).map(p=>({pid:idOf(p.pokemon.url),name:p.pokemon.name}));
-    const sid=n=>ENTRIES.find(e=>e.name===n||n.startsWith(e.name+'-'))?.id;
-    det.innerHTML=`<div class="lcd"><h2 style="font:400 22px Silkscreen,monospace;margin:0">${esc(pretty(area))}</h2>${esc(g.nome)} · ${mons.length} Pokémon · vermelho = falta na sua dex</div><div class="body"><div class="chips">${mons.map(m=>{const id=sid(m.name);return`<span class="${id&&!GOT.has(id)?'miss':''}" data-go="${id||m.pid}"><img loading="lazy" src="${SPR}${m.pid}.png" alt="">${esc(m.name.replace(/-/g,' '))}</span>`}).join('')||'Sem dados deste jogo.'}</div><p><a target="_blank" rel="noopener" href="https://bulbapedia.bulbagarden.net/w/index.php?search=${encodeURIComponent(pretty(area))}">Ver mapa na Bulbapedia</a></p></div>`;
+    const L=await get('location/'+loc);
+    const areas=await Promise.all(L.areas.map(a=>get(a.url)));
+    const mons=new Map();
+    for(const a of areas)for(const p of a.pokemon_encounters)if(p.version_details.some(v=>g.ver.includes(v.version.name))){
+      const sid=await get(p.pokemon.url).then(x=>idOf(x.species.url)).catch(()=>null);
+      if(sid&&!mons.has(p.pokemon.name))mons.set(p.pokemon.name,{pid:idOf(p.pokemon.url),sid});
+    }
+    const inDex=id=>ENTRIES.some(e=>e.id===id);
+    det.innerHTML=`<div class="lcd"><h2 style="font:400 22px Silkscreen,monospace;margin:0">${esc(locName(loc))}</h2>${esc(g.nome)} · ${mons.size} Pokémon · em vermelho = falta na sua dex</div><div class="body">${pics(loc)}
+      <h3>Pokémon deste local</h3><div class="chips">${[...mons].map(([n,m])=>`<span class="${inDex(m.sid)&&!GOT.has(m.sid)?'miss':''}" data-go="${m.sid}">${img(SPR+m.pid+'.png',m.sid)}${esc(nm(n))}</span>`).join('')||'Sem Pokémon selvagem neste jogo.'}</div>
+      <p class="lk"><a target="_blank" rel="noopener" href="${bpLink(loc)}">Abrir na Bulbapedia</a></p></div>`;
   }catch(e){det.innerHTML='<div class="empty">Erro ('+esc(e.message)+').</div>'}
 }
-$('#det').addEventListener('click',ev=>{
-  const a=ev.target.closest('[data-area]');if(a){ev.preventDefault();showArea(a.dataset.area);return}
-  const go=ev.target.closest('[data-go]');if(go&&+go.dataset.go<10000)showMon(+go.dataset.go);
-});
 
-$('#game').innerHTML=Object.entries(GAMES).map(([k,g])=>`<option value="${k}">${g.nome}</option>`).join('');
-G=ls.get('ld:last','sword');if(!GAMES[G])G='sword';$('#game').value=G;$('#mode').value=ls.get('ld:mode','reg');
-$('#game').onchange=e=>{G=e.target.value;ls.set('ld:last',G);SEL=null;$('#det').innerHTML='<div class="empty">Escolha um Pokémon na lista.</div>';loadDex()};
+// Mapa da região com um pino por local que tem Pokémon neste jogo.
+function showMap(mapKey,focus){
+  const det=$('#det'),g=GAMES[G];
+  let locs=(AREAS.jogo[G]||[]).filter(l=>LOCS[l]&&LOCS[l].x!=null&&MAPS[LOCS[l].mapa]);
+  // abas pela quantidade de pinos; mapa com 1-2 pinos perdidos (local homônimo de outra região) sai se houver mapa principal
+  const cnt={};locs.forEach(l=>cnt[LOCS[l].mapa]=(cnt[LOCS[l].mapa]||0)+1);
+  let keys=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]);
+  if(cnt[keys[0]]>=3){keys=keys.filter(k=>cnt[k]>=3);locs=locs.filter(l=>keys.includes(LOCS[l].mapa))}
+  if(!keys.length){det.innerHTML='<div class="empty">Mapa ainda não disponível para este jogo.</div>';return}
+  mapKey=keys.includes(mapKey)?mapKey:keys[0];const M=MAPS[mapKey];
+  const here=locs.filter(l=>LOCS[l].mapa===mapKey).sort((a,b)=>locName(a).localeCompare(locName(b)));
+  const semPino=(AREAS.jogo[G]||[]).filter(l=>!locs.includes(l));
+  det.innerHTML=`<div class="lcd"><h2 style="font:400 22px Silkscreen,monospace;margin:0">Mapa · ${esc(M.titulo||mapKey)}</h2>${esc(g.nome)} · ${here.length} locais com Pokémon. Toque num ponto.</div><div class="body">
+    ${keys.length>1?`<div class="tabs">${keys.map(k=>`<button data-tab="${esc(k)}" class="${k===mapKey?'on':''}">${esc(MAPS[k].titulo||k)}</button>`).join('')}</div>`:''}
+    <div class="bigmap"><img src="data/${M.arquivo}" alt="Mapa de ${esc(M.titulo||mapKey)}">${here.map(l=>`<button class="pt${l===focus?' focus':''}" style="left:${LOCS[l].x}%;top:${LOCS[l].y}%" data-loc="${esc(l)}" title="${esc(locName(l))}" aria-label="${esc(locName(l))}"></button>`).join('')}</div>
+    <div class="legend"><span><i style="background:#2979ff"></i>local com Pokémon</span><span><i style="background:#ffd740"></i>local selecionado</span></div>
+    <h3>Locais (${here.length})</h3><div class="loclist">${here.map(l=>`<a href="#" data-loc="${esc(l)}">${esc(locName(l))}</a>`).join('')}</div>
+    ${semPino.length?`<h3>Outros locais sem pino no mapa</h3><div class="loclist">${semPino.map(l=>`<a href="#" data-loc="${esc(l)}">${esc(locName(l))}</a>`).join('')}</div>`:''}</div>`;
+  if(focus)det.querySelector('.pt.focus')?.scrollIntoView({block:'center',behavior:'smooth'});
+}
+
+$('#det').addEventListener('click',ev=>{
+  const t=ev.target;
+  const tab=t.closest('[data-tab]');if(tab){showMap(tab.dataset.tab);return}
+  const mp=t.closest('[data-map]');if(mp){showMap(mp.dataset.map,mp.dataset.focus);return}
+  const a=t.closest('[data-loc]');if(a){ev.preventDefault();showLocation(a.dataset.loc);return}
+  const go=t.closest('[data-go]');if(go){ev.preventDefault();showMon(+go.dataset.go)}
+});
+$('#det').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.matches('[data-map]'))ev.target.click()});
+
+function initGames(){
+  const gens={};for(const [k,g] of Object.entries(GAMES))(gens[g.gen]=gens[g.gen]||[]).push(`<option value="${k}">${esc(g.nome)}</option>`);
+  $('#game').innerHTML=Object.entries(gens).map(([n,o])=>`<optgroup label="Geração ${n}">${o.join('')}</optgroup>`).join('');
+  // Migra o progresso salvo com as chaves antigas (antes de existirem todos os jogos).
+  try{for(const [a,b] of [['ultrasun','ultra-sun']])for(const m of ['reg','nat']){const v=localStorage.getItem(`ld:${a}:${m}`);if(v&&!localStorage.getItem(`ld:${b}:${m}`))localStorage.setItem(`ld:${b}:${m}`,v)}}catch{}
+  G=ls.get('ld:last','sword');if(G==='ultrasun')G='ultra-sun';if(!GAMES[G])G='sword';$('#game').value=G;$('#mode').value=ls.get('ld:mode','reg');
+}
+$('#game').onchange=async e=>{G=e.target.value;ls.set('ld:last',G);SEL=null;$('#det').innerHTML='<div class="empty">Escolha um Pokémon na lista ou abra o 🗺 Mapa.</div>';await loadEnc(G);loadDex()};
 $('#mode').onchange=e=>{ls.set('ld:mode',e.target.value);loadDex()};
 $('#q').oninput=$('#show').onchange=renderList;
+$('#mapbtn').onclick=()=>showMap();
 $('#exp').onclick=()=>{const d={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('ld:'))d[k]=JSON.parse(localStorage.getItem(k))}}catch{}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(d)],{type:'application/json'}));a.download='livingdex-progresso.json';a.click()};
 $('#imp').onclick=()=>$('#file').click();
 $('#file').onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].text());for(const k in d)if(k.startsWith('ld:'))ls.set(k,d[k]);loadDex();alert('Progresso importado.')}catch{alert('Arquivo inválido.')}};
-loadDex();
+Promise.all([opt('data/games.json'),opt('data/avail.json'),opt('data/pt.json'),opt('data/locs.json'),opt('data/maps/index.json'),opt('data/areas.json')]).then(async([gs,a,t,l,m,ar])=>{
+  GAMES=gs;AV=a;TR=t;LOCS=l;MAPS=m;if(ar.area)AREAS=ar;
+  if(!Object.keys(GAMES).length){$('#list').innerHTML='<div class="empty">Não consegui carregar data/games.json.</div>';return}
+  initGames();await loadEnc(G);loadDex()});
 </script>
 </body>
 </html>

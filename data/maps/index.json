@@ -1,0 +1,152 @@
+{
+ "sinnoh": {
+  "arquivo": "maps/sinnoh.webp",
+  "w": 216,
+  "h": 168,
+  "titulo": "Sinnoh"
+ },
+ "unova": {
+  "arquivo": "maps/unova.webp",
+  "w": 256,
+  "h": 168,
+  "titulo": "Unova"
+ },
+ "kalos": {
+  "arquivo": "maps/kalos.webp",
+  "w": 256,
+  "h": 168,
+  "titulo": "Kalos"
+ },
+ "hoenn": {
+  "arquivo": "maps/hoenn.webp",
+  "w": 257,
+  "h": 159,
+  "titulo": "Hoenn"
+ },
+ "johto": {
+  "arquivo": "maps/johto.webp",
+  "w": 212,
+  "h": 145,
+  "titulo": "Johto"
+ },
+ "hoenn-2": {
+  "arquivo": "maps/hoenn-2.webp",
+  "w": 353,
+  "h": 225,
+  "titulo": "Hoenn (ORAS)"
+ },
+ "kanto": {
+  "arquivo": "maps/kanto.webp",
+  "w": 363,
+  "h": 146,
+  "titulo": "Kanto"
+ },
+ "kalos-2": {
+  "arquivo": "maps/kalos-2.webp",
+  "w": 960,
+  "h": 960,
+  "titulo": "Lumiose City"
+ },
+ "ula-ula": {
+  "arquivo": "maps/ula-ula.webp",
+  "w": 320,
+  "h": 240,
+  "titulo": "Alola - Ula'ula"
+ },
+ "akala": {
+  "arquivo": "maps/akala.webp",
+  "w": 320,
+  "h": 240,
+  "titulo": "Alola - Akala"
+ },
+ "melemele": {
+  "arquivo": "maps/melemele.webp",
+  "w": 320,
+  "h": 240,
+  "titulo": "Alola - Melemele"
+ },
+ "sevii-islands": {
+  "arquivo": "maps/sevii-islands.webp",
+  "w": 192,
+  "h": 144,
+  "titulo": "Sevii Islands"
+ },
+ "sevii-islands-2": {
+  "arquivo": "maps/sevii-islands-2.webp",
+  "w": 192,
+  "h": 144,
+  "titulo": "Sevii Islands (2)"
+ },
+ "isle-of-armor": {
+  "arquivo": "maps/isle-of-armor.webp",
+  "w": 960,
+  "h": 489,
+  "titulo": "Isle of Armor"
+ },
+ "poni": {
+  "arquivo": "maps/poni.webp",
+  "w": 320,
+  "h": 240,
+  "titulo": "Alola - Poni"
+ },
+ "galar": {
+  "arquivo": "maps/galar.webp",
+  "w": 876,
+  "h": 1600,
+  "titulo": "Galar"
+ },
+ "crown-tundra": {
+  "arquivo": "maps/crown-tundra.webp",
+  "w": 962,
+  "h": 1005,
+  "titulo": "Crown Tundra"
+ },
+ "kitakami": {
+  "arquivo": "maps/kitakami.webp",
+  "w": 1600,
+  "h": 1600,
+  "titulo": "Kitakami"
+ },
+ "paldea-2": {
+  "arquivo": "maps/paldea-2.webp",
+  "w": 1600,
+  "h": 1600,
+  "titulo": "Paldea"
+ },
+ "unova-2": {
+  "arquivo": "maps/unova-2.webp",
+  "w": 815,
+  "h": 1600,
+  "titulo": "Blueberry Academy (Terarium)"
+ },
+ "hisui-cobalt": {
+  "arquivo": "maps/hisui-cobalt.webp",
+  "w": 960,
+  "h": 515,
+  "titulo": "Hisui - Cobalt Coastlands"
+ },
+ "hisui-coronet": {
+  "arquivo": "maps/hisui-coronet.webp",
+  "w": 960,
+  "h": 515,
+  "titulo": "Hisui - Coronet Highlands"
+ },
+ "hisui-alabaster": {
+  "arquivo": "maps/hisui-alabaster.webp",
+  "w": 960,
+  "h": 515,
+  "titulo": "Hisui - Alabaster Icelands"
+ },
+ "hisui-obsidian": {
+  "arquivo": "maps/hisui-obsidian.webp",
+  "w": 960,
+  "h": 515,
+  "titulo": "Hisui - Obsidian Fieldlands"
+ },
+ "hisui-crimson": {
+  "arquivo": "maps/hisui-crimson.webp",
+  "w": 960,
+  "h": 515,
+  "titulo": "Hisui - Crimson Mirelands"
+ }
+}

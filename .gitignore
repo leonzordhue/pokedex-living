@@ -1,0 +1,5 @@
+__pycache__/
+scripts/_cache/
+scripts/_check/
+scripts/_csv/
+scripts/_tr/
