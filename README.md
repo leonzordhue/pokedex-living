@@ -5,6 +5,8 @@ Red, Blue, Yellow · Gold, Silver, Crystal · Ruby, Sapphire, Emerald, FireRed, 
 
 ## O que faz
 - Escolha o jogo e veja a dex regional ou a nacional até a geração do jogo.
+- **Pokémon em todos os jogos**: escolha um Pokémon e veja como obtê-lo em cada um dos 38 jogos (captura, evolução, ovo, troca, transferência, evento) com os locais resumidos; "Abrir neste jogo" leva à ficha completa.
+- Link direto para compartilhar: `#todos/25` (Pikachu em todos os jogos) ou `#sword/25` (Pikachu no Sword).
 - Busque por nome ou número. Filtros: todos, faltando, "faltando e dá pra pegar aqui", tenho.
 - **Como obter** em cada jogo: captura direta, evoluindo, chocando ovo (com o incenso, quando precisa), exclusivo da versão irmã (trocar), evento, ou como trazer de outra geração (Time Capsule, Pal Park, Poké Transfer, Bank, HOME).
 - **Onde encontrar**: local, método (grama, pesca, Headbutt, Rock Smash, surto, Poké Radar, SOS, horda, Max Raid, Dynamax Adventure, troca com NPC...), nível, chance, hora do dia, clima, estação e outras condições, tudo em português, com dicas.

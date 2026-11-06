@@ -78,6 +78,12 @@ h3{font:400 15px Silkscreen,monospace;margin:16px 0 6px;color:var(--shell)}
 .bigmap .pt.has{background:#ff1744}.bigmap .pt.done{background:#2e7d32}.bigmap .pt.focus{width:24px;height:24px;margin:-12px 0 0 -12px;background:#ffd740;animation:pulse 1.2s infinite}
 .legend{font-size:13px;margin:6px 0;display:flex;gap:12px;flex-wrap:wrap}.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1px solid #000}
 .loclist{columns:2 220px;font-size:14px;margin-top:8px}.loclist a{display:block;padding:1px 0}
+.gen{margin:14px 0 4px;font:400 14px Silkscreen,monospace;color:var(--muted)}
+.gg{border:2px solid var(--line);border-radius:8px;padding:6px 8px;margin-bottom:6px;background:#fff}
+.gg.w{border-left:6px solid var(--ok)}.gg.e,.gg.o{border-left:6px solid #5c6bc0}.gg.v,.gg.t{border-left:6px solid #f9a825}.gg.m{border-left:6px solid #c2185b}
+.gg h4{margin:0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.gg h4 button{margin-left:auto}
+.gg .ls{font-size:13px;color:#333;margin:3px 0 0}
+.nao{font-size:14px;color:var(--muted);background:#eee;border-radius:8px;padding:6px 8px}
 footer{color:#fff;font-size:12px;margin-top:10px;opacity:.9}footer a{color:#fff}
 @media(max-width:760px){.dex{margin:0;border-radius:0;padding:10px}.grid{grid-template-columns:1fr}.list{max-height:45vh}.ctrl{margin-left:0;width:100%}.ctrl>*{flex:1}.art .big{width:130px;height:130px}.art .spr{width:84px;height:84px}.mini{width:150px}.photo{width:130px}}
 </style>
@@ -88,6 +94,7 @@ footer{color:#fff;font-size:12px;margin-top:10px;opacity:.9}footer a{color:#fff}
   <div class="lens"></div><div class="leds"><i></i><i></i><i></i></div>
   <h1>Living Dex</h1>
   <div class="ctrl">
+    <select id="view" aria-label="Como pesquisar"><option value="jogo">Pesquisar por jogo</option><option value="todos">Pokémon em todos os jogos</option></select>
     <select id="game" aria-label="Jogo"></select>
     <select id="mode" aria-label="Tipo de dex"><option value="reg">Dex regional</option><option value="nat">Dex nacional (até a gen)</option></select>
     <button id="mapbtn" title="Mapa da região com todos os locais do jogo">🗺 Mapa</button>
@@ -168,7 +175,8 @@ const TPT={normal:'Normal',fire:'Fogo',water:'Água',electric:'Elétrico',grass:
 
 // Dados estáticos gerados pelos scripts/ (podem faltar: o app segue funcionando sem eles).
 let AV={},TR={},LOCS={},MAPS={},AREAS={area:{},jogo:{}};
-let G='sword',ENTRIES=[],GOT=new Set(),SEL=null;
+let G='sword',ENTRIES=[],GOT=new Set(),SEL=null,VIEW='jogo';
+const NATMAX=1025;
 const key=()=>'ld:'+G+':'+$('#mode').value;
 const st=id=>(AV[G]||{})[id]||'';
 const obtainable=id=>/^[weo]/.test(st(id));
@@ -183,7 +191,8 @@ const img=(src,id,cls='',alt='')=>`<img loading="lazy" class="${cls}" src="${src
 
 // Locais: área da PokéAPI -> local -> nome, mapa e fotos (data/locs.json).
 const locOf=area=>area.startsWith('bp:')?area:AREAS.area[area]||area.replace(/-area$/,'');
-function locName(loc){return LOCS[loc]?.nome||ENC[G]?.locais?.[loc]?.nome||(loc.startsWith('bp:')?loc.slice(3):pretty(loc))}
+function locName(loc){const n=LOCS[loc]?.nome||ENC[G]?.locais?.[loc]?.nome||(loc.startsWith('bp:')?loc.slice(3):pretty(loc));
+  const h=n.match(/^List of (\w+)-type hyperspace wild zones$/i);return h?'Hiperespaço: zonas tipo '+(TPT[h[1].toLowerCase()]||h[1]):n}
 function areaName(area){const l=locOf(area);if(l===area)return locName(l);const suf=area.slice(l.length+1).replace(/^area$/,'');return locName(l)+(suf?' · '+pretty(suf):'')}
 // Foto do local no visual do jogo (frlg, hgss, oras, bdsp...), senão a da geração mais próxima.
 function photo(loc){const f=LOCS[loc]?.fotos||{},g=GAMES[G];if(f[g.foto])return f[g.foto];if(f[g.gen])return f[g.gen];
@@ -201,8 +210,8 @@ function pics(loc){const p=photo(loc);return`<div class="pics">${p?`<img class="
 async function loadDex(){
   const g=GAMES[G];$('#list').innerHTML='<div class="empty">Carregando dex...</div>';
   try{
-    if($('#mode').value==='nat'){
-      const d=await get('pokemon-species?limit='+g.nat);ENTRIES=d.results.map((s,i)=>({n:i+1,id:idOf(s.url),name:s.name}));
+    if(VIEW==='todos'||$('#mode').value==='nat'){
+      const d=await get('pokemon-species?limit='+(VIEW==='todos'?NATMAX:g.nat));ENTRIES=d.results.map((s,i)=>({n:i+1,id:idOf(s.url),name:s.name}));
     }else{
       const seen=new Set();ENTRIES=[];
       for(const dx of g.dex){const d=await get('pokedex/'+dx);for(const e of d.pokemon_entries){const id=idOf(e.pokemon_species.url);if(seen.has(id))continue;seen.add(id);ENTRIES.push({n:ENTRIES.length+1,id,name:e.pokemon_species.name})}}
@@ -213,6 +222,11 @@ async function loadDex(){
 const BADGE={e:'evo',o:'ovo',v:'troca',t:'transferir',m:'evento',x:'fora'};
 function renderList(){
   const q=norm($('#q').value),f=$('#show').value;
+  if(VIEW==='todos'){
+    const rows=ENTRIES.filter(e=>!q||norm(e.name).includes(q)||String(e.id)===q);
+    $('#list').innerHTML=rows.map(e=>`<div class="row${SEL===e.id?' sel':''}" data-id="${e.id}"><span class="n">#${String(e.id).padStart(3,'0')}</span>${img(SPR+e.id+'.png',e.id)}<span class="nm">${esc(nm(e.name))}</span></div>`).join('')||'<div class="empty">Nada encontrado.</div>';
+    $('#prog').textContent=`Todos os jogos · ${ENTRIES.length} Pokémon`;$('#pbar').style.width='100%';return;
+  }
   const rows=ENTRIES.filter(e=>(!q||norm(e.name).includes(q)||String(e.id)===q||String(e.n)===q)&&(f==='all'||(f==='got'?GOT.has(e.id):!GOT.has(e.id)&&(f!=='here'||obtainable(e.id)))));
   $('#list').innerHTML=rows.map(e=>{const s=st(e.id)[0];return`<div class="row${GOT.has(e.id)?' got':''}${SEL===e.id?' sel':''}" data-id="${e.id}"><span class="n">#${String(e.n).padStart(3,'0')}</span>${img(sprite(e.id),e.id)}<span class="nm">${esc(nm(e.name))}${s&&s!=='w'?`<span class="st-b b-${s}" title="${esc(statusText(e.id,true))}">${BADGE[s]}</span>`:''}</span><input type="checkbox" aria-label="Tenho ${esc(nm(e.name))}" ${GOT.has(e.id)?'checked':''}></div>`}).join('')||'<div class="empty">Nada encontrado.</div>';
   const t=ENTRIES.length,c=ENTRIES.filter(e=>GOT.has(e.id)).length;
@@ -222,7 +236,7 @@ function setGot(id,on){on?GOT.add(id):GOT.delete(id);ls.set(key(),[...GOT]);rend
 $('#list').addEventListener('click',ev=>{
   const row=ev.target.closest('.row');if(!row)return;const id=+row.dataset.id;
   if(ev.target.type==='checkbox'){setGot(id,ev.target.checked);return}
-  showMon(id);
+  openMon(id);
 });
 const spName=id=>(ENTRIES.find(e=>e.id===id)||{}).name;
 function statusText(id,plain){
@@ -303,8 +317,10 @@ function evoHtml(node,first=true){
   return me+'<span aria-hidden="true">→</span><span class="evo" style="flex-direction:column;align-items:flex-start">'+node.evolves_to.map(n=>'<span class="evo">'+evoHtml(n,true)+'</span>').join('')+'</span>';
 }
 
+const openMon=id=>VIEW==='todos'?showAll(id):showMon(id);
+function setHash(h){try{history.replaceState(null,'','#'+h)}catch{}}
 async function showMon(id){
-  SEL=id;renderList();const det=$('#det');det.innerHTML='<div class="empty">Consultando a Pokédex...</div>';
+  SEL=id;renderList();setHash(G+'/'+id);const det=$('#det');det.innerHTML='<div class="empty">Consultando a Pokédex...</div>';
   const g=GAMES[G];
   try{
     const sp=await get('pokemon-species/'+id);
@@ -331,13 +347,53 @@ async function showMon(id){
       <h3>Como obter em ${esc(g.nome)}</h3><div class="obter">${statusText(id)}</div>
       <h3>Onde encontrar</h3>${locHtml}
       <h3>Linha evolutiva</h3><div class="evo">${evoHtml(chain.chain)}</div>
-      <h3>Nos seus outros jogos</h3><div class="ga">${other.length?'Dá para obter também em: '+esc(other.join(', ')):'Não sai em nenhum dos seus outros jogos.'}</div></div>`;
+      <h3>Nos outros jogos</h3><div class="ga">${other.length?'Dá para obter também em: '+esc(other.join(', ')):'Não sai em nenhum outro jogo.'} <button class="sm" id="todosbtn">Ver como obter em todos os jogos</button></div></div>`;
+    $('#todosbtn').onclick=()=>{VIEW='todos';$('#view').value='todos';ls.set('ld:view','todos');setView();loadDex().then(()=>showAll(id))};
     const cry=new Audio('https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/'+id+'.ogg');
     $('#crybtn').onclick=()=>cry.play().catch(()=>{});
     $('#shinybtn').onclick=e=>{const on=e.target.getAttribute('aria-pressed')!=='true';e.target.setAttribute('aria-pressed',on);e.target.textContent=on?'Ver normal':'✨ Ver shiny';$('#artimg').src=art(id,on);$('#sprimg').src=sprite(id,on)};
     $('#gotme').onchange=e=>setGot(id,e.target.checked);
   }catch(e){det.innerHTML='<div class="empty">Erro ao consultar ('+esc(e.message)+'). Verifique a internet.</div>'}
 }
+
+// "Pokémon em todos os jogos": como obter o Pokémon em cada um dos 38 jogos, com os locais resumidos.
+function comG(k,fn){const old=G;G=k;try{return fn()}finally{G=old}}
+async function showAll(id){
+  SEL=id;renderList();setHash('todos/'+id);const det=$('#det');det.innerHTML='<div class="empty">Consultando todos os jogos...</div>';
+  try{
+    const sp=await get('pokemon-species/'+id);
+    const bpg=Object.keys(GAMES).filter(k=>GAMES[k].src==='bp');
+    const [pk,encs]=await Promise.all([get('pokemon/'+id),(async()=>{const out=[];
+      for(const v of sp.varieties){const form=v.is_default?'':v.pokemon.name.replace(sp.name+'-','');let enc=[];try{enc=await get('pokemon/'+idOf(v.pokemon.url)+'/encounters')}catch{}
+        for(const a of enc)for(const vd of a.version_details)out.push({area:a.location_area.name,ver:vd.version.name,form,det:vd.encounter_details})}
+      return out})(),Promise.all(bpg.map(loadEnc))]);
+    if(SEL!==id)return;
+    const tr=TR[id]||{},gen=tr.g||(sp.genera.find(x=>x.language.name==='en')||{}).genus||'';
+    const resumo=k=>{const g=GAMES[k],by=new Map();
+      if(g.src==='bp'){for(const r of (ENC[k]?.enc?.[id])||[]){const n=comG(k,()=>locName(r.loc))+(r.form?' ('+r.form+')':'');(by.get(n)||by.set(n,new Set()).get(n)).add(r.mpt||METODO[r.m]||pretty(r.m||''))}}
+      else for(const e of encs)if(g.ver.includes(e.ver)&&!e.det.every(d=>d.method.name==='colosseum-bonus-disc-jpn')){const n=comG(k,()=>areaName(e.area))+(e.form?' ('+e.form+')':'');const ms=by.get(n)||by.set(n,new Set()).get(n);e.det.forEach(d=>d.method.name!=='colosseum-bonus-disc-jpn'&&ms.add(METODO[d.method.name]||pretty(d.method.name)))}
+      const it=[...by].map(([n,ms])=>n+' · '+[...ms].join(', '));
+      return it.length?it.slice(0,8).join('; ')+(it.length>8?'; e mais '+(it.length-8)+' locais':''):''};
+    const gens={},nao=[];
+    for(const [k,g] of Object.entries(GAMES)){const s=(AV[k]||{})[id]||'';
+      if(!s||s[0]==='x'){nao.push(g.nome.replace(' (+ DLCs)',''));continue}
+      const ls2=s[0]==='w'?resumo(k):'';
+      (gens[g.gen]=gens[g.gen]||[]).push(`<div class="gg ${s[0]}"><h4>${esc(g.nome)}${s[0]!=='w'?`<span class="st-b b-${s[0]}">${BADGE[s[0]]}</span>`:''}<button class="sm" data-open="${k}" data-id="${id}">Abrir neste jogo</button></h4><div class="how">${s[0]==='w'?'Captura direta.':comG(k,()=>statusText(id))}</div>${ls2?`<p class="ls"><b>Onde:</b> ${esc(ls2)}</p>`:''}</div>`)}
+    det.innerHTML=`<div class="lcd"><div class="top"><img class="big" style="width:120px;height:120px;object-fit:contain;background:radial-gradient(circle,#e8f5c8,#9bbc0f);border:3px solid var(--ink);border-radius:50%" src="${art(id)}" alt="Arte oficial de ${esc(nm(sp.name))}"><div style="flex:1;min-width:200px"><h2>#${String(id).padStart(3,'0')} ${esc(nm(sp.name))}</h2><div style="font-size:18px">${esc(gen)}</div><div class="types">${pk.types.map(t=>`<span style="background:${TCOR[t.type.name]||'#777'}">${TPT[t.type.name]||t.type.name}</span>`).join('')}</div></div></div></div>
+      <div class="body"><h3>Como obter em cada jogo</h3><p class="how">Verde = captura direta · azul = evolução ou ovo · amarelo = troca ou transferência · rosa = evento. "Abrir neste jogo" mostra mapa, nível, chance e condições.</p>
+      ${Object.entries(gens).map(([n,h])=>`<div class="gen">Geração ${n}</div>${h.join('')}`).join('')}
+      ${nao.length?`<h3>Não existe em</h3><div class="nao">${esc(nao.join(', '))}</div>`:''}</div>`;
+  }catch(e){det.innerHTML='<div class="empty">Erro ao consultar ('+esc(e.message)+'). Verifique a internet.</div>'}
+}
+async function abrirNoJogo(k,id){
+  VIEW='jogo';$('#view').value='jogo';ls.set('ld:view','jogo');setView();
+  G=k;$('#game').value=k;ls.set('ld:last',k);await loadEnc(k);await loadDex();
+  // fora da dex regional? usa a nacional para o Pokémon aparecer na lista
+  if(!ENTRIES.some(e=>e.id===id)&&$('#mode').value==='reg'){$('#mode').value='nat';await loadDex()}
+  showMon(id);
+}
+function setView(){const t=VIEW==='todos';['#game','#mode','#mapbtn','#show','#exp','#imp'].forEach(s=>$(s).hidden=t);
+  $('#q').placeholder=t?'Nome ou número do Pokémon...':'Nome ou número...'}
 
 // Cards de encontro dos jogos extraídos da Bulbapedia (formato em scripts/ENC_SCHEMA.md).
 function bpCards(id,E){
@@ -406,7 +462,8 @@ $('#det').addEventListener('click',ev=>{
   const tab=t.closest('[data-tab]');if(tab){showMap(tab.dataset.tab);return}
   const mp=t.closest('[data-map]');if(mp){showMap(mp.dataset.map,mp.dataset.focus);return}
   const a=t.closest('[data-loc]');if(a){ev.preventDefault();showLocation(a.dataset.loc);return}
-  const go=t.closest('[data-go]');if(go){ev.preventDefault();showMon(+go.dataset.go)}
+  const ab=t.closest('[data-open]');if(ab){abrirNoJogo(ab.dataset.open,+ab.dataset.id);return}
+  const go=t.closest('[data-go]');if(go){ev.preventDefault();openMon(+go.dataset.go)}
 });
 $('#det').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.matches('[data-map]'))ev.target.click()});
 
@@ -418,6 +475,7 @@ function initGames(){
   G=ls.get('ld:last','sword');if(G==='ultrasun')G='ultra-sun';if(!GAMES[G])G='sword';$('#game').value=G;$('#mode').value=ls.get('ld:mode','reg');
 }
 $('#game').onchange=async e=>{G=e.target.value;ls.set('ld:last',G);SEL=null;$('#det').innerHTML='<div class="empty">Escolha um Pokémon na lista ou abra o 🗺 Mapa.</div>';await loadEnc(G);loadDex()};
+$('#view').onchange=e=>{VIEW=e.target.value;ls.set('ld:view',VIEW);SEL=null;setView();$('#det').innerHTML='<div class="empty">'+(VIEW==='todos'?'Escolha um Pokémon para ver como obter em todos os jogos.':'Escolha um Pokémon na lista ou abra o 🗺 Mapa.')+'</div>';loadDex()};
 $('#mode').onchange=e=>{ls.set('ld:mode',e.target.value);loadDex()};
 $('#q').oninput=$('#show').onchange=renderList;
 $('#mapbtn').onclick=()=>showMap();
@@ -427,7 +485,14 @@ $('#file').onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].tex
 Promise.all([opt('data/games.json'),opt('data/avail.json'),opt('data/pt.json'),opt('data/locs.json'),opt('data/maps/index.json'),opt('data/areas.json')]).then(async([gs,a,t,l,m,ar])=>{
   GAMES=gs;AV=a;TR=t;LOCS=l;MAPS=m;if(ar.area)AREAS=ar;
   if(!Object.keys(GAMES).length){$('#list').innerHTML='<div class="empty">Não consegui carregar data/games.json.</div>';return}
-  initGames();await loadEnc(G);loadDex()});
+  initGames();
+  // link direto: #todos/25 ou #sword/25
+  const h=location.hash.slice(1).split('/'),hid=+h[1];
+  VIEW=h[0]==='todos'?'todos':GAMES[h[0]]?'jogo':ls.get('ld:view','jogo');
+  if(GAMES[h[0]]){G=h[0];$('#game').value=G}
+  $('#view').value=VIEW;setView();await loadEnc(G);await loadDex();
+  if(hid>0&&hid<=NATMAX){if(VIEW==='jogo'&&!ENTRIES.some(e=>e.id===hid)&&$('#mode').value==='reg'){$('#mode').value='nat';await loadDex()}openMon(hid)}
+  else if(VIEW==='todos')$('#det').innerHTML='<div class="empty">Escolha um Pokémon para ver como obter em todos os jogos.</div>'});
 </script>
 </body>
 </html>
