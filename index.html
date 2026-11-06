@@ -56,9 +56,12 @@ h3{font:400 15px Silkscreen,monospace;margin:16px 0 6px;color:var(--shell)}
 .photo{width:150px;height:auto;max-height:112px;object-fit:cover;border-radius:6px;border:2px solid #222}
 .mini{position:relative;width:180px;border:2px solid #222;border-radius:6px;overflow:hidden;cursor:pointer;line-height:0;background:#000}
 .mini img{width:100%;height:auto}
-.pin{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#ff1744;border:2px solid #fff;box-shadow:0 0 0 2px #000a;animation:pulse 1.4s infinite}
+.pin{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#ff1744;border:1.5px solid #fff;box-shadow:0 0 0 1px #000a;pointer-events:none}
+/* o ponto fica pequeno e parado; só um anel fino pulsa em volta, sem cobrir o local */
+.pin::after,.bigmap .pt.focus::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid #ff1744;animation:ring 1.6s ease-out infinite}
+@keyframes ring{from{transform:scale(.6);opacity:1}to{transform:scale(2.2);opacity:0}}
 @keyframes pulse{50%{transform:scale(1.5)}}
-@media(prefers-reduced-motion:reduce){.pin{animation:none}}
+@media(prefers-reduced-motion:reduce){.pin::after,.bigmap .pt.focus::after{animation:none;opacity:.6}}
 .how{font-size:14px;margin:2px 0}.how em{color:var(--muted);font-style:normal}
 .tag{display:inline-block;background:#ffe082;border-radius:6px;padding:0 6px;margin:1px 2px;font-size:12px}
 .tip{background:#e3f2fd;border-left:4px solid #1e88e5;padding:4px 8px;margin:4px 0;font-size:13px}
@@ -75,7 +78,7 @@ h3{font:400 15px Silkscreen,monospace;margin:16px 0 6px;color:var(--shell)}
 .bigmap{position:relative;width:100%;border:3px solid #222;border-radius:8px;overflow:hidden;line-height:0;background:#000}
 .bigmap img{width:100%;height:auto}
 .bigmap .pt{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #000a;cursor:pointer;padding:0;background:#2979ff}
-.bigmap .pt.has{background:#ff1744}.bigmap .pt.done{background:#2e7d32}.bigmap .pt.focus{width:24px;height:24px;margin:-12px 0 0 -12px;background:#ffd740;animation:pulse 1.2s infinite}
+.bigmap .pt.has{background:#ff1744}.bigmap .pt.done{background:#2e7d32}.bigmap .pt.focus{width:12px;height:12px;margin:-6px 0 0 -6px;background:#ffd740;border-width:1.5px}.bigmap .pt.focus::after{border-color:#ffd740}
 .legend{font-size:13px;margin:6px 0;display:flex;gap:12px;flex-wrap:wrap}.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1px solid #000}
 .loclist{columns:2 220px;font-size:14px;margin-top:8px}.loclist a{display:block;padding:1px 0}
 .gen{margin:14px 0 4px;font:400 14px Silkscreen,monospace;color:var(--muted)}
